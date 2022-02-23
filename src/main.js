@@ -1,4 +1,20 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
-createApp(App).mount('#app')
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { FontAwesomeIcon } from './plugins/font-awesome';
+
+import "@/css/site.css";
+import "@/css/colores.css";
+
+import setupInterceptors from './services/setupInterceptors';
+setupInterceptors(store);
+
+createApp(App)
+  .use(router)
+  .use(store)
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .mount("#app");
