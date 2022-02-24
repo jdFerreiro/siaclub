@@ -23,7 +23,7 @@ html {
 }
 
 body{
-    background-image: url("http://upload.wikimedia.org/wikipedia/commons/8/86/Jefferson_Park_in_Chicago.JPG");
+    background-image: url("../assets/Mariperez.png");
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -77,6 +77,6 @@ body{
     margin: 0 10px;
 }
 
-.navbar {
-    padding: 0 10px;
+.flecha {
+    caret-color: #000;
 }
