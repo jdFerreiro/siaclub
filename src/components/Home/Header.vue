@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="row">
     <div class="header row degradadoBanderaGal">
       <div class="col-md-12">
         <div class="left col-md-8 horizontalText">
@@ -8,7 +8,7 @@
           </div>
           <div class="left subtitulo">
             <span class="textoRojo bordeTextoAmarillo1 bold">
-              Hermandad Gallega de Venezuela
+              Hermandad Gallega de Venezuela A.C.
             </span>
             <br />
             <span class="textoAmarillo bordeTextoRojo1">
@@ -48,41 +48,7 @@
           </ul>
         </li>
         <li class="right">
-          <a href="#"> <span><i class="fas fa-user"></i></span>&nbsp;&nbsp;Ingresar&nbsp;&nbsp;<span><i class="fas fa-caret-down"></i> </span> </a>
-          <div class="degradadoBanderaGal dropstart fixed" style="width: 320px;margin-left:auto; margin-right:0;">
-            <Form class="mx-4 my-3 was-validated" @submit="handleLogin" :validation-schema="schema">
-              <div class="fw-bold center w-100">
-                Acceso de Socios
-              </div>
-              <div class="mb-3">
-                <label for="useremail" class="form-label">Correo electrónico:</label>
-                <Field name="useremail" type="email" class="form-control" aria-describedby="emailHelp" />
-                <div id="emailHelp" class="form-text">No compartiremos tu correo electrónico con nadie más sin tu autorización.</div>
-                <ErrorMessage name="username" class="error-feedback" />
-              </div>
-              <div class="mb-3">
-                <label for="userpassword" class="form-label">Contraseña:</label>
-                <Field type="password" class="form-control" name="userpassword" />
-                <ErrorMessage name="userpassword" class="error-feedback" />
-              </div>
-              <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" name="chkremember" />
-                <label class="form-check-label" for="exampleCheck1">Recuerdame</label>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block right">
-                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                <span>Ingresar</span>
-              </button>
-              <div class="form-group">
-                <div v-if="message" class="alert alert-danger" role="alert">
-                  {{ message }}
-                </div>
-              </div>
-            </Form>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">¿No tienes usuario? Registrate</a>
-            <a class="dropdown-item" href="#">¿Olvidaste la contraseña?</a>
-          </div>
+          <router-link to="/Login"> <span><i class="fas fa-user"></i></span>&nbsp;&nbsp;Ingresar&nbsp;&nbsp;<span></span> </router-link>
         </li>
       </ul>
     </div>
@@ -92,8 +58,6 @@
 <script>
 import UserService from "../../services/user.service";
 import { FontAwesomeIcon } from '../../plugins/font-awesome';
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
 
 
 export default {
@@ -101,19 +65,9 @@ export default {
   name: "Home",
   components: {
     FontAwesomeIcon,
-    Form,
-    Field,
-    ErrorMessage,
   },
   data() {
-    const schema = yup.object().shape({
-      useremail: yup.string().required("Se requiere un correo electrónico"),
-      userpassword: yup.string().required("Se requiere la contraseña"),
-    });
     return {
-      loading: false,
-      message: "",
-      schema,
       primaryMenu: [
         {
           name: "Inicio",
@@ -285,16 +239,6 @@ export default {
       content: "",
     };
   },
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    }
-  },
-  created() {
-    if (this.loggedIn) {
-      this.$router.push("/profile");
-    }
-  },
   mounted() {
     UserService.getPublicContent().then(
       (response) => {
@@ -311,27 +255,6 @@ export default {
     );
   },
   methods: {
-    handleLogin(data) {
-      this.loading = true;
-
-       var userObj = {
-        email: data.useremail,
-        password: data.userpassword,
-      };
-
-      this.$store.dispatch("auth/login", userObj)
-      .then(() => {
-        this.$router.push("/profile");
-      },
-      (error) => {
-        this.loading = false;
-        this.message = (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-      });
-    },
     currentDate() {
       return new Date().toLocaleString();
     },
@@ -347,6 +270,7 @@ export default {
 
 #menuDD {
   margin-top: 10px;
+  z-index: 1000;
 }
 
 ul {

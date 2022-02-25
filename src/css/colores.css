@@ -30,6 +30,10 @@
     color: yellow;
 }
 
+.textoNegro {
+    color: #000;
+}
+
 .fondoCeleste {
     background-color: #009EE0;
 }
@@ -40,6 +44,22 @@
 
 .fondoAmarillo {
     background-color: yellow;
+}
+
+.bordeTextoCeleste1 {
+    -webkit-text-stroke: 1px #009EE0;;
+}
+.bordeTextoCeleste2 {
+    -webkit-text-stroke: 2px #009EE0;;
+}
+.bordeTextoCeleste3 {
+    -webkit-text-stroke: 3px #009EE0;;
+}
+.bordeTextoCeleste4 {
+    -webkit-text-stroke: 4px #009EE0;;
+}
+.bordeTextoCeleste5 {
+    -webkit-text-stroke: 5px #009EE0;;
 }
 
 .bordeTextoNegro1 {
@@ -88,4 +108,20 @@
 }
 .bordeTextoRojo5 {
     -webkit-text-stroke: 5px #da1919;
+}
+
+.bordeTextoBlanco1 {
+    -webkit-text-stroke: 1px #fff;;
+}
+.bordeTextoBlanco2 {
+    -webkit-text-stroke: 2px #fff;;
+}
+.bordeTextoBlanco3 {
+    -webkit-text-stroke: 3px #fff;;
+}
+.bordeTextoBlanco4 {
+    -webkit-text-stroke: 4px #fff;;
+}
+.bordeTextoBlanco5 {
+    -webkit-text-stroke: 5px #fff;;
 }
