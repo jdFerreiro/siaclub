@@ -1,17 +1,17 @@
 <template>
-  <HomeContent></HomeContent>
+  <HomeHeader></HomeHeader>
 </template>
 
 <script>
 // @ is an alias to /src
-import HomeContent from '../components/Home.vue'
+import HomeHeader from '../components/Home/Header.vue'
 
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Home',
   components: {
-    HomeContent
+    HomeHeader
   }
 }
 </script>

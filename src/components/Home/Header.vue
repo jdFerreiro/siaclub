@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="left col-md-8 horizontalText">
           <div class="left logo">
-            <img src="../assets/logoHG.png" style="width: 60px" />
+            <img src="../../assets/logoHG.png" style="width: 60px" />
           </div>
           <div class="left subtitulo">
             <span class="textoRojo bordeTextoAmarillo1 bold">
@@ -48,28 +48,40 @@
           </ul>
         </li>
         <li class="right">
-          <a href="#" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Ingresar </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <form class="px-4 py-3">
-            <div class="form-group">
-              <label for="exampleDropdownFormEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
-            </div>
-            <div class="form-group">
-              <label for="exampleDropdownFormPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-              <label class="form-check-label" for="dropdownCheck">
-                Remember me
-              </label>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </form>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">New around here? Sign up</a>
-          <a class="dropdown-item" href="#">Forgot password?</a>
+          <a href="#"> <span><i class="fas fa-user"></i></span>&nbsp;&nbsp;Ingresar&nbsp;&nbsp;<span><i class="fas fa-caret-down"></i> </span> </a>
+          <div class="degradadoBanderaGal dropstart fixed" style="width: 320px;margin-left:auto; margin-right:0;">
+            <Form class="mx-4 my-3 was-validated" @submit="handleLogin" :validation-schema="schema">
+              <div class="fw-bold center w-100">
+                Acceso de Socios
+              </div>
+              <div class="mb-3">
+                <label for="useremail" class="form-label">Correo electrónico:</label>
+                <Field name="useremail" type="email" class="form-control" aria-describedby="emailHelp" />
+                <div id="emailHelp" class="form-text">No compartiremos tu correo electrónico con nadie más sin tu autorización.</div>
+                <ErrorMessage name="username" class="error-feedback" />
+              </div>
+              <div class="mb-3">
+                <label for="userpassword" class="form-label">Contraseña:</label>
+                <Field type="password" class="form-control" name="userpassword" />
+                <ErrorMessage name="userpassword" class="error-feedback" />
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="chkremember" />
+                <label class="form-check-label" for="exampleCheck1">Recuerdame</label>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block right">
+                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                <span>Ingresar</span>
+              </button>
+              <div class="form-group">
+                <div v-if="message" class="alert alert-danger" role="alert">
+                  {{ message }}
+                </div>
+              </div>
+            </Form>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">¿No tienes usuario? Registrate</a>
+            <a class="dropdown-item" href="#">¿Olvidaste la contraseña?</a>
           </div>
         </li>
       </ul>
@@ -78,17 +90,30 @@
 </template>
 
 <script>
-import UserService from "../services/user.service";
-import { FontAwesomeIcon } from '../plugins/font-awesome';
+import UserService from "../../services/user.service";
+import { FontAwesomeIcon } from '../../plugins/font-awesome';
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
+
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Home",
   components: {
-    FontAwesomeIcon
+    FontAwesomeIcon,
+    Form,
+    Field,
+    ErrorMessage,
   },
   data() {
+    const schema = yup.object().shape({
+      useremail: yup.string().required("Se requiere un correo electrónico"),
+      userpassword: yup.string().required("Se requiere la contraseña"),
+    });
     return {
+      loading: false,
+      message: "",
+      schema,
       primaryMenu: [
         {
           name: "Inicio",
@@ -260,6 +285,16 @@ export default {
       content: "",
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push("/profile");
+    }
+  },
   mounted() {
     UserService.getPublicContent().then(
       (response) => {
@@ -276,6 +311,27 @@ export default {
     );
   },
   methods: {
+    handleLogin(data) {
+      this.loading = true;
+
+       var userObj = {
+        email: data.useremail,
+        password: data.userpassword,
+      };
+
+      this.$store.dispatch("auth/login", userObj)
+      .then(() => {
+        this.$router.push("/profile");
+      },
+      (error) => {
+        this.loading = false;
+        this.message = (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+      });
+    },
     currentDate() {
       return new Date().toLocaleString();
     },
@@ -305,7 +361,11 @@ ul li {
   float: left;
 }
 
-li ul { display: none; }
+li ul, li div { display: none; }
+
+li div form div {
+  display: block;
+}
 
 ul li a {
   display: block;
@@ -325,9 +385,13 @@ li:hover > ul {
   position: absolute;
 }
 
+li:hover > div {
+  display: block;
+}
+
 li:hover li { float: none; }
 
-li:hover a {     
+li:hover a {
   background: rgb(255,255,255);
   background: -moz-linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,158,224,1) 100%);
   background: -webkit-linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,158,224,1) 100%);
