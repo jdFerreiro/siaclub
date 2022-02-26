@@ -7,6 +7,8 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from './plugins/font-awesome';
 
+import Toaster from '@meforma/vue-toaster';
+
 import "@/css/site.css";
 import "@/css/colores.css";
 
@@ -16,5 +18,6 @@ setupInterceptors(store);
 createApp(App)
   .use(router)
   .use(store)
+  .use(Toaster)
   .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");

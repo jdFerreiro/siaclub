@@ -1,5 +1,6 @@
 import api from "./api";
 import TokenService from "./token.service";
+import authHeader from "./auth-header";
 
 class AuthService {
     login( { email, password }) 
@@ -14,11 +15,13 @@ class AuthService {
             return response.data;
         });
     }
-    logout() {
-        var user = localStorage.getItem('user');
-        
-        return api.post('auth/signOut', {
-            username: user.id
+    logout(id) {
+        return api.post('auth/signOut', 
+        {
+            IdUsuario: id
+        }, 
+        { 
+            headers: authHeader() 
         }).then(response => {
             if (response.data.success) {
                 TokenService.setUser(response.data);

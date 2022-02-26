@@ -11,9 +11,7 @@
               Hermandad Gallega de Venezuela A.C.
             </span>
             <br />
-            <span class="textoAmarillo bordeTextoRojo1">
-              Galicia en Caracas
-            </span>
+            <span class="textoAmarillo bordeTextoRojo1"> Galicia en Caracas </span>
           </div>
         </div>
         <div class="right">
@@ -34,21 +32,33 @@
       </div>
       <ul id="menuDD" class="dropdown">
         <li v-for="menu in primaryMenu" :key="menu">
-          <a href="#"> {{ menu.name }} <span v-if="menu.children"><i class="fas fa-caret-down"></i> </span> </a>
-          <ul v-if="menu.children" style="margin-left: -28px;">
+          <a href="#">
+            {{ menu.name }}
+            <span v-if="menu.children"><i class="fas fa-caret-down"></i> </span>
+          </a>
+          <ul v-if="menu.children" style="margin-left: -28px">
             <li v-for="child in menu.children" :key="child">
-              <a href="" v-if="!child.children"> {{child.name}} </a>
-              <a href="#" v-if="child.children"> {{child.name}} <span><i class="fas fa-caret-right"></i> </span> </a>
+              <a href="" v-if="!child.children"> {{ child.name }} </a>
+              <a href="#" v-if="child.children">
+                {{ child.name }} <span><i class="fas fa-caret-right"></i> </span>
+              </a>
               <ul v-if="child.children">
-                  <li v-for="child1 in child.children" :key="child1" style="margin-left: -28px;">
-                    <a href=""> {{child1.name}} </a>
-                  </li>
+                <li
+                  v-for="child1 in child.children"
+                  :key="child1"
+                  style="margin-left: -28px"
+                >
+                  <a href=""> {{ child1.name }} </a>
+                </li>
               </ul>
             </li>
           </ul>
         </li>
         <li class="right">
-          <router-link to="/Login"> <span><i class="fas fa-user"></i></span>&nbsp;&nbsp;Ingresar&nbsp;&nbsp;<span></span> </router-link>
+          <router-link to="/Login">
+            <span><i class="fas fa-user"></i></span>&nbsp;&nbsp;Ingresar&nbsp;&nbsp;<span
+            ></span>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -57,8 +67,7 @@
 
 <script>
 import UserService from "../../services/user.service";
-import { FontAwesomeIcon } from '../../plugins/font-awesome';
-
+import { FontAwesomeIcon } from "../../plugins/font-awesome";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -79,10 +88,7 @@ export default {
             { name: "Órganos Electivos" },
             {
               name: "Comité de Damas",
-              children: [
-                { name: "Escuela de Sevillanas" },
-                { name: "Contacto" },
-              ],
+              children: [{ name: "Escuela de Sevillanas" }, { name: "Contacto" }],
             },
             {
               name: "Comité Juvenil",
@@ -146,10 +152,7 @@ export default {
             },
             {
               name: "Dirección de Relaciones Públicas",
-              children: [
-                { name: 'Boletín "Somos Hermandad"' },
-                { name: "Contacto" },
-              ],
+              children: [{ name: 'Boletín "Somos Hermandad"' }, { name: "Contacto" }],
             },
             {
               name: "Oficina de Administración",
@@ -246,9 +249,7 @@ export default {
       },
       (error) => {
         this.content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
+          (error.response && error.response.data && error.response.data.message) ||
           error.message ||
           error.toString();
       }
@@ -259,7 +260,6 @@ export default {
       return new Date().toLocaleString();
     },
     setSelectedItem(item) {
-      console.log("item selected" + item);
       this.selectedDropdown = item;
     },
   },
@@ -267,7 +267,6 @@ export default {
 </script>
 
 <style>
-
 #menuDD {
   margin-top: 10px;
   z-index: 1000;
@@ -285,7 +284,10 @@ ul li {
   float: left;
 }
 
-li ul, li div { display: none; }
+li ul,
+li div {
+  display: none;
+}
 
 li div form div {
   display: block;
@@ -299,9 +301,9 @@ ul li a {
   color: #000;
 }
 
-ul li a:hover { 
-  background: #da1919; 
-  color: yellow; 
+ul li a:hover {
+  background: #da1919;
+  color: yellow;
 }
 
 li:hover > ul {
@@ -313,18 +315,33 @@ li:hover > div {
   display: block;
 }
 
-li:hover li { float: none; }
+li:hover li {
+  float: none;
+}
 
 li:hover a {
-  background: rgb(255,255,255);
-  background: -moz-linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,158,224,1) 100%);
-  background: -webkit-linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,158,224,1) 100%);
-  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,158,224,1) 100%);
+  background: rgb(255, 255, 255);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(0, 158, 224, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(0, 158, 224, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(0, 158, 224, 1) 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#009ee0",GradientType=1);
 }
 
-
-.main-navigation li ul li { border-top: 0; }
+.main-navigation li ul li {
+  border-top: 0;
+}
 
 ul ul ul {
   left: 100%;
@@ -337,6 +354,7 @@ ul:after {
   display: table; /* 2 */
 }
 
-ul:after { clear: both; }
-
+ul:after {
+  clear: both;
+}
 </style>

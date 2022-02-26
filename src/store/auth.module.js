@@ -1,6 +1,7 @@
 import AuthService from '../services/auth.service';
 
 const dataLogin = JSON.parse(localStorage.getItem('dataLogin'));
+
 const initialState = dataLogin
     ? { status: { loggedIn: true }, dataLogin }
     : { status: { loggedIn: false }, user: null };
@@ -23,8 +24,8 @@ export const auth = {
                 }
             );
         },
-        logout({ commit }) {
-            AuthService.logout();
+        logout({ commit }, userId) {
+            AuthService.logout(userId);
             commit('logout');
         },
         register({ commit }, user) {
@@ -46,15 +47,15 @@ export const auth = {
     mutations: {
         loginSuccess(state, user) {
             state.status.loggedIn = true;
-            state.user = user;
+            state.status.user = user;
         },
         loginFailure(state) {
             state.status.loggedIn = false;
-            state.user = null;
+            state.status.user = null;
         },
         logout(state) {
             state.status.loggedIn = false;
-            state.user = null;
+            state.status.user = null;
         },
         registerSuccess(state) {
             state.status.loggedIn = false;
@@ -64,7 +65,7 @@ export const auth = {
         },
         refreshToken(state, accessToken) {
             state.status.loggedIn = true;
-            state.user = { ...state.user, accessToken: accessToken };
+            state.status.user = { ...state.status.user, accessToken: accessToken };
         }
     }
 };
