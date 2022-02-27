@@ -2,19 +2,26 @@
   <div class="row">
     <div class="header row degradadoBanderaGal">
       <div class="col-md-12">
-        <div class="left col-md-8 horizontalText">
+        <div class="left col-md-6 horizontalText">
           <div class="left logo">
             <img src="../assets/logoHG.png" style="width: 60px" />
           </div>
           <div class="left subtitulo">
-            <span class="textoRojo bordeTextoAmarillo1 bold">
+            <span class="textoRojo yellowShadowText_2_2_5 bold">
               Hermandad Gallega de Venezuela A.C.
             </span>
             <br />
-            <span class="textoAmarillo bordeTextoRojo1"> Galicia en Caracas </span>
+            <span class="textoAmarillo redShadowText_2_2_5"> Galicia en Caracas </span>
           </div>
         </div>
-        <div class="right">
+        <div class="left InfoUser col-md-3 mr-1">
+          <span class="right">
+            <button class="btn btn-primary" @click="signOut">Cerrar Sesión</button>
+          </span>
+          <span class="fw-bold">Bienvenido: </span> {{ username }}<br />
+          <span class="fw-bold">Última conexión: {{ lastConnectionDate }}</span>
+        </div>
+        <div class="right col-md-2">
           <div class="horizontalText">
             <div>
               <p>Fecha: {{ currentDate() }}</p>
@@ -29,13 +36,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="InfoUser col-md-12 mt-2">
-        <span class="right">
-          <button class="btn btn-primary" @click="signOut">Cerrar Sesión</button>
-        </span>
-        <span class="fw-bold">Bienvenido: </span> {{ username }}<br />
-        <span class="fw-bold">Última conexión: {{ lastConnectionDate }}</span>
       </div>
     </div>
   </div>

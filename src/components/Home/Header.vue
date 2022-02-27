@@ -7,11 +7,11 @@
             <img src="../../assets/logoHG.png" style="width: 60px" />
           </div>
           <div class="left subtitulo">
-            <span class="textoRojo bordeTextoAmarillo1 bold">
+            <span class="textoRojo yellowShadowText_2_2_5 bold">
               Hermandad Gallega de Venezuela A.C.
             </span>
             <br />
-            <span class="textoAmarillo bordeTextoRojo1"> Galicia en Caracas </span>
+            <span class="textoAmarillo redShadowText_2_2_5"> Galicia en Caracas </span>
           </div>
         </div>
         <div class="right">

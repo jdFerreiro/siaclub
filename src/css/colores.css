@@ -125,3 +125,51 @@
 .bordeTextoBlanco5 {
     -webkit-text-stroke: 5px #fff;;
 }
+
+.blackShadowText_2_2_5{
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+}
+
+.redShadowText_2_2_5{
+    text-shadow: 2px 2px 5px #da1919;
+}
+
+.yellowShadowText_2_2_5{
+    text-shadow: 2px 2px 5px yellow;
+}
+
+.cianShadowText_2_2_5{
+    text-shadow: 2px 2px 5px #009EE0;
+}
+
+.whiteShadowText_2_2_5{
+    text-shadow: 2px 2px 5px #fff;
+}
+
+.grey50ShadowText_2_2_5{
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.fa_blackShadowText_2_2_5{
+    filter: drop-shadow(2px 2px 5px rgb(0, 0, 0));
+}
+
+.fa_redShadowText_2_2_5{
+    filter: drop-shadow( 2px 2px 5px #da1919);
+}
+
+.fa_yellowShadowText_2_2_5{
+    filter: drop-shadow( 2px 2px 5px yellow);
+}
+
+.fa_cianShadowText_2_2_5{
+    filter: drop-shadow( 2px 2px 5px #009EE0);
+}
+
+.fa_whiteShadowText_2_2_5{
+    filter: drop-shadow( 2px 2px 5px #fff);
+}
+
+.grey50ShadowText_2_2_5{
+    filter: drop-shadow( 2px 2px 5px rgba(0, 0, 0, 0.5));
+}

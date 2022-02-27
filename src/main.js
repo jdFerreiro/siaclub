@@ -5,6 +5,7 @@ import store from "./store";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 import { FontAwesomeIcon } from './plugins/font-awesome';
 
 import Toaster from '@meforma/vue-toaster';

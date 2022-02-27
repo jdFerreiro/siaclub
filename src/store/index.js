@@ -11,18 +11,22 @@ export default createStore({
         userName: null,
         lastConnectedDate: null,
         user: null,
+        IdSocio: null,
+        IdPersona: null,
     },
     mutations: {
         setAuthenticated(state, value) {
             state.isAuthenticated = value;
         },
-        setAuthData(state, { stateId, userId, email, rolId, userName, lastConnectedDate }) {
+        setAuthData(state, { stateId, userId, email, rolId, userName, lastConnectedDate, idSocio, idPersona }) {
             state.userId = userId;
             state.stateId = stateId;
             state.email = email;
             state.rolId = rolId;
             state.userName = userName;
             state.lastConnectedDate = lastConnectedDate;
+            state.IdSocio = (idSocio) ? idSocio : null;
+            state.IdPersona = (idPersona) ? idPersona : null ;
         },
     },    
     modules: {

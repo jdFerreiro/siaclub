@@ -110,9 +110,31 @@ body{
 
 .InfoUser {
     display: block;
-    float: right;
     background-color: #fff;
     padding: 10px;
     border: solid 2px #000;
     border-radius: 5px;
+    box-shadow: 2px 2px 5px #000;
+}
+
+.showServiceMap {
+    height: 854px;
+    width: 1290px;
+    background-image: url("../assets/MapaHG.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.lineMap {
+    height: 5%;
+    text-align: center;
+    width: 100%;
+}
+
+.lineMap a {
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8rem
 }
