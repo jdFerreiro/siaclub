@@ -5,7 +5,9 @@ import Login from "./views/Login.vue";
 
 // lazy-loaded
 import Profile  from "./views/Profile.vue";
-import ResumePartner  from "./views/ResumePartner.vue";
+import ResumePartner  from "./views/Partners/ResumePartner.vue";
+import BusinessPartner from "./views/Partners/Business.vue";
+import AdminServicios from "./views/Admin/Servicios.vue";
 
 const routes = [
     {
@@ -28,6 +30,14 @@ const routes = [
     {
         path: "/ResumePartner",
         component: ResumePartner,
+    },
+    {
+        path: "/BusinessPartner",
+        component: BusinessPartner,
+    },
+    {
+        path: "/AdminServicios",
+        component: AdminServicios,
     },
 /*
     {

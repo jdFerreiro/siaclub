@@ -12,6 +12,7 @@ import Toaster from '@meforma/vue-toaster';
 
 import "@/css/site.css";
 import "@/css/colores.css";
+import "@/css/menu.css";
 
 import setupInterceptors from './services/setupInterceptors';
 setupInterceptors(store);

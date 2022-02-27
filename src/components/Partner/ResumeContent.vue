@@ -1,15 +1,5 @@
 <template>
   <div class="row">
-    <div class="degradadoBanderaGal">
-      <div class="right">
-        <h3 class="text-white blackShadowText_2_2_5" v-if="IsPartner">
-          Portal para Asociados
-        </h3>
-        <h3 class="text-white blackShadowText_2_2_5" v-if="!IsPartner">
-          Portal Administrativo
-        </h3>
-      </div>
-    </div>
     <div class="row mt-4">
       <div class="col-sm-4">
         <div class="card">
@@ -41,7 +31,7 @@
                 <div class="row col-md-2">
                   <div class="col-md-6"></div>
                   <div class="col-md-6">
-                    <a href="#">
+                    <router-link to="/BusinessPartner">
                       <i
                         class="fas fa-store fa-2x fa_cianShadowText_2_2_5"
                         data-bs-toggle="tooltip"
@@ -52,7 +42,7 @@
                       </i>
                       <br />
                       <span>Comercios</span>
-                    </a>
+                    </router-link>
                   </div>
                 </div>
                 <div class="col-md-2">
@@ -445,17 +435,9 @@ export default {
   // eslint-disable-next-line
   name: "ResumeContent",
   data() {
-    return {
-      IsPartner: false,
-    };
+    return {};
   },
   mounted() {
-    if (!this.$store.state.userName) {
-      this.$router.push("/login");
-    }
-    if (this.$store.state.IdSocio) {
-      this.IsPartner = true;
-    }
     Array.from(document.querySelectorAll('button[data-bs-toggle="tooltip"]')).forEach(
       (tooltipNode) => new Tooltip(tooltipNode)
     );

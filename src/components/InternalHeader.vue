@@ -15,9 +15,6 @@
           </div>
         </div>
         <div class="left InfoUser col-md-3 mr-1">
-          <span class="right">
-            <button class="btn btn-primary" @click="signOut">Cerrar Sesión</button>
-          </span>
           <span class="fw-bold">Bienvenido: </span> {{ username }}<br />
           <span class="fw-bold">Última conexión: {{ lastConnectionDate }}</span>
         </div>
@@ -37,6 +34,40 @@
           </div>
         </div>
       </div>
+      <div class="text-center">
+        <h3 class="text-white blackShadowText_2_2_5" v-if="IsPartner">
+          Portal para Asociados<span v-if="moduleName"> - {{ moduleName }}</span>
+        </h3>
+        <h3 class="text-white blackShadowText_2_2_5" v-if="!IsPartner">
+          Portal Administrativo
+        </h3>
+      </div>
+      <ul id="menuDD" class="dropdown">
+        <li v-for="menu in primaryMenu" :key="menu">
+          <a :href="menu.path">
+            {{ menu.name }}
+            <span v-if="menu.children"><i class="fas fa-caret-down"></i> </span>
+          </a>
+          <ul v-if="menu.children">
+            <li v-for="child in menu.children" :key="child">
+              <a :href="child.path" v-if="!child.children"> {{ child.name }} </a>
+              <a href="#" v-if="child.children">
+                {{ child.name }} <span><i class="fas fa-caret-right"></i> </span>
+              </a>
+              <ul v-if="child.children">
+                <li v-for="child1 in child.children" :key="child1">
+                  <a href=""> {{ child1.name }} </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="right">
+          <span class="right">
+            <button class="btn btn-primary" @click="signOut">Cerrar Sesión</button>
+          </span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -47,17 +78,44 @@ import moment from "moment";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "InternalHeader",
+  props: {
+    moduleName: String,
+  },
   data() {
     return {
       lastConnectionDate: null,
+      IsPartner: false,
       username: "",
       userId: 0,
+      rolId: [],
+      primaryMenu: [
+        {
+          name: "Resumen",
+          path: "\\ResumePartner",
+        },
+        {
+          name: "Administración",
+          children: [
+            {
+              name: "Servicios",
+              path: "\\AdminServicios",
+            },
+          ],
+        },
+      ],
     };
   },
   mounted() {
+    if (!this.$store.state.userName) {
+      this.$router.push("/login");
+    }
+    if (this.$store.state.IdSocio) {
+      this.IsPartner = true;
+    }
     var date = this.$store.state.lastConnectedDate;
     this.username = this.$store.state.userName;
     this.userId = this.$store.state.userId;
+    this.rolId = this.$store.state.rolId;
     if (!date) {
       date = new Date();
     }

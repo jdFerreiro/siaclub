@@ -87,7 +87,6 @@ export default {
           var data = response.data;
 
           this.$store.commit("setAuthenticated", true);
-          console.log(data);
           localStorage.setItem("token", data.accessToken);
           this.$store.commit("setAuthData", {
             userId: data.userId,
@@ -99,8 +98,6 @@ export default {
             idSocio: data.idSocio,
             idPersona: data.idPersona,
           });
-
-          console.log(this.$store.state);
 
           this.loading = false;
           if (!data.firstTime) {

@@ -36,18 +36,14 @@
             {{ menu.name }}
             <span v-if="menu.children"><i class="fas fa-caret-down"></i> </span>
           </a>
-          <ul v-if="menu.children" style="margin-left: -28px">
+          <ul v-if="menu.children">
             <li v-for="child in menu.children" :key="child">
               <a href="" v-if="!child.children"> {{ child.name }} </a>
               <a href="#" v-if="child.children">
                 {{ child.name }} <span><i class="fas fa-caret-right"></i> </span>
               </a>
               <ul v-if="child.children">
-                <li
-                  v-for="child1 in child.children"
-                  :key="child1"
-                  style="margin-left: -28px"
-                >
+                <li v-for="child1 in child.children" :key="child1">
                   <a href=""> {{ child1.name }} </a>
                 </li>
               </ul>
@@ -66,7 +62,6 @@
 </template>
 
 <script>
-import UserService from "../../services/user.service";
 import { FontAwesomeIcon } from "../../plugins/font-awesome";
 
 export default {
@@ -242,19 +237,6 @@ export default {
       content: "",
     };
   },
-  mounted() {
-    UserService.getPublicContent().then(
-      (response) => {
-        this.content = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response && error.response.data && error.response.data.message) ||
-          error.message ||
-          error.toString();
-      }
-    );
-  },
   methods: {
     currentDate() {
       return new Date().toLocaleString();
@@ -265,96 +247,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#menuDD {
-  margin-top: 10px;
-  z-index: 1000;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-ul li {
-  display: block;
-  position: relative;
-  float: left;
-}
-
-li ul,
-li div {
-  display: none;
-}
-
-li div form div {
-  display: block;
-}
-
-ul li a {
-  display: block;
-  text-decoration: none;
-  white-space: nowrap;
-  padding: 1em;
-  color: #000;
-}
-
-ul li a:hover {
-  background: #da1919;
-  color: yellow;
-}
-
-li:hover > ul {
-  display: block;
-  position: absolute;
-}
-
-li:hover > div {
-  display: block;
-}
-
-li:hover li {
-  float: none;
-}
-
-li:hover a {
-  background: rgb(255, 255, 255);
-  background: -moz-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(0, 158, 224, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(0, 158, 224, 1) 100%
-  );
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(0, 158, 224, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#009ee0",GradientType=1);
-}
-
-.main-navigation li ul li {
-  border-top: 0;
-}
-
-ul ul ul {
-  left: 100%;
-  top: 0;
-}
-
-ul:before,
-ul:after {
-  content: " "; /* 1 */
-  display: table; /* 2 */
-}
-
-ul:after {
-  clear: both;
-}
-</style>

@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import InternalHeader from "../components/InternalHeader.vue";
-import ResumeContent from "../components/Partner/ResumeContent.vue";
+import InternalHeader from "../../components/InternalHeader.vue";
+import ResumeContent from "../../components/Partner/ResumeContent.vue";
 
 export default {
   name: "ResumePartner",

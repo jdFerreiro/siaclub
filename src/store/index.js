@@ -1,5 +1,7 @@
 import { createStore } from "vuex";
 import { auth } from "./auth.module";
+import { servicio } from "./service.module";
+import VuexPersistence from "vuex-persist";
 
 export default createStore({
     state: {
@@ -28,9 +30,15 @@ export default createStore({
             state.IdSocio = (idSocio) ? idSocio : null;
             state.IdPersona = (idPersona) ? idPersona : null ;
         },
-    },    
+    },
+    plugins: [
+        new VuexPersistence({
+            storage: window.localStorage
+        }).plugin
+    ],
     modules: {
-        auth
+        auth,
+        servicio,
     },
 });
 
